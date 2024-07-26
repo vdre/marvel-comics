@@ -1,0 +1,71 @@
+<section class="shadow-md rounded-xl p-8 animate__animated animate__fadeIn min-w-96">
+    <form class="grid grid-cols-1" (ngSubmit)="create()" [formGroup]="form">
+        <h1 class="text-3xl font-bold">Registrate</h1>
+
+        <div class="flex flex-col gap-2 my-4 justify-center">
+            <label
+                [ngClass]="{'text-red-600': form.get('name')?.invalid && form.get('name')?.touched}"
+            >
+                Nombre
+            </label>
+            <input 
+                pInputText 
+                id="name"
+                type="text"
+                placeholder="Ingrese el nombre"
+                formControlName="name"
+                [ngClass]="{'border-red-600': form.get('name')?.invalid && form.get('name')?.touched}"
+                class="border-b p-2 bg-gray-50 outline-none hover:border-amber-400 focus:border-amber-400"
+            />
+            <div class="text-red-600 text-sm" *ngIf="form.get('name')?.invalid && form.get('name')?.touched && form.get('name')?.errors">
+                <small *ngIf="form.get('name')?.errors?.['required']">El nombre es requerido.</small>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-2 my-4 justify-center">
+            <label
+                [ngClass]="{'text-red-600': form.get('identification')?.invalid && form.get('identification')?.touched}"
+            >
+                N° de Identificación
+            </label>
+            <input 
+                pInputText 
+                id="identification"
+                type="text"
+                placeholder="Ingrese n° de identificación"
+                formControlName="identification"
+                [ngClass]="{'border-red-600': form.get('identification')?.invalid && form.get('identification')?.touched}"
+                class="border-b p-2 bg-gray-50 outline-none hover:border-amber-400 focus:border-amber-400"
+            />
+            <div class="text-red-600 text-sm" *ngIf="form.get('identification')?.invalid && form.get('identification')?.touched && form.get('identification')?.errors">
+                <small *ngIf="form.get('identification')?.errors?.['required']">El N° de identificación es requerido.</small>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-2 my-4 justify-center">
+            <label
+                [ngClass]="{'text-red-600': form.get('email')?.invalid && form.get('email')?.touched}"
+            >
+                Correo
+            </label>
+            <input 
+                pInputText 
+                id="email"
+                type="text"
+                placeholder="Ingrese el correo"
+                formControlName="email"
+                [ngClass]="{'border-red-600': form.get('email')?.invalid && form.get('email')?.touched}"
+                class="border-b p-2 bg-gray-50 outline-none hover:border-amber-400 focus:border-amber-400"
+            />
+            <div class="text-red-600 text-sm" *ngIf="form.get('email')?.invalid && form.get('email')?.touched && form.get('email')?.errors">
+                <small *ngIf="form.get('email')?.errors?.['required']">El correo es requerido.</small>
+                <small *ngIf="form.get('email')?.errors?.['pattern']">El correo no es valido.</small>
+            </div>
+        </div>
+
+        <button type="submit" class="focus:outline-none text-white bg-amber-400 hover:bg-amber-500 focus:ring-4 focus:ring-amber-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-8">Registrar</button>
+
+        <a class="text-amber-400 hover:text-amber-500 text-center cursor-pointer" (click)="sendOption()">Iniciar Sesión</a>
+
+    </form>
+</section>

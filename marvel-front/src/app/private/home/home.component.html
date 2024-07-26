@@ -1,0 +1,53 @@
+<nav class="bg-white w-full border-b border-gray-200 shadow-amber-400 shadow-md animate__animated animate__fadeIn px-8">
+    <div class="items-center justify-end w-full flex " id="navbar-sticky">
+        <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
+            <li>
+              <a href="javascript: void(0);" routerLink="/home" routerLinkActive="active" class="block py-2 px-3 hover:text-amber-400 font-bold" >Home</a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" routerLink="/my-comics" routerLinkActive="active" class="block py-2 px-3 hover:text-amber-400 font-bold" >Mis Comics</a>
+            </li>
+            <li>
+              <a href="javascript: void(0);" (click)="logout()" class="block py-2 px-3 hover:text-amber-400 font-bold" >Cerrar Sesión</a>
+            </li>
+          </ul>
+    </div>
+<div *ngIf="loader" class="grid place-content-center h-[calc(100vh-80px)] animate__animated animate__fadeIn">
+    <app-loader></app-loader>
+</div>
+
+</nav>
+<section *ngIf="!loader" class="animate__animated animate__fadeIn grid md:grid-cols-3 grid-cols-1 gap-8 container mx-auto p-8 ">
+
+
+      
+
+        <div class="block bg-white shadow-md rounded-xl hover:shadow-amber-400 relative" *ngFor="let comic of listComics">
+            <a href="javascript:void(0)">
+                <img
+                    class="rounded-t-lg h-[300px] w-full object-cover"
+                    [src]="comic.thumbnail.path + '.' + comic.thumbnail.extension"
+                    [alt]="comic.title" />
+            </a>
+            <div class="p-6 text-surface mb-6">
+                <h5 class="mb-2 text-xl font-medium leading-tight">{{comic.title}}</h5>
+                <p class="mb-4 text-base description">
+                    {{comic.description || 'No hay descripción'}}
+                </p>
+                
+            </div>
+            <button type="button" (click)="viewComic(comic)" class="focus:outline-none absolute bottom-0 text-white bg-amber-400 hover:bg-amber-500 focus:ring-4 focus:ring-amber-300 font-medium rounded-b-lg text-sm px-5 py-2.5 w-full">Ver</button>
+        </div>
+
+        <div class="grid place-content-center col-span-3">
+            <button *ngIf="!loaderMore" type="button" (click)="showMore()" class="block focus:outline-none text-white bg-amber-400 hover:bg-amber-500 focus:ring-4 focus:ring-amber-300 rounded-lg text-sm px-5 py-2.5 my-8 md:w-48 w-auto mx-auto font-bold ">Ver más</button>
+    
+            <div *ngIf="loaderMore" class="grid place-content-center my-8 animate__animated animate__fadeIn">
+                <app-loader></app-loader>
+            </div>
+        </div>
+
+
+</section>
+
+<app-view-comic [getShow]="showModal" [getComic]="comic!" (close)="closeModal()" ></app-view-comic>

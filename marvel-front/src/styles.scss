@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import 'animate.css';
+@import "primeicons/primeicons.css";
+
+body{
+    font-family: monospace, sans-serif;
+}
+
+.active{
+    @apply text-amber-400
+}

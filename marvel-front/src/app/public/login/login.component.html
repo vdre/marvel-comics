@@ -1,0 +1,29 @@
+<section class="shadow-md rounded-xl p-8 animate__animated animate__fadeIn">
+    <form class="grid grid-cols-1" (ngSubmit)="login()" [formGroup]="form">
+        <h1 class="text-3xl font-bold">Iniciar Sesión</h1>
+
+        <div class="flex flex-col gap-2 my-8 justify-center">
+            <label
+                [ngClass]="{'text-red-600': form.get('email')?.invalid && form.get('email')?.touched}"
+            >Correo</label>
+            <input 
+                pInputText 
+                id="email"
+                type="text"
+                placeholder="Ingrese el correo"
+                formControlName="email"
+                [ngClass]="{'border-red-600': form.get('email')?.invalid && form.get('email')?.touched}"
+                class="border-b p-2 bg-gray-50 outline-none hover:border-amber-400 focus:border-amber-400"
+            />
+            <div class="text-red-600 text-sm" *ngIf="form.get('email')?.invalid && form.get('email')?.touched && form.get('email')?.errors">
+                <small *ngIf="form.get('email')?.errors?.['required']">El correo es requerido.</small>
+                <small *ngIf="form.get('email')?.errors?.['pattern']">El correo no es valido.</small>
+            </div>
+        </div>
+
+        <button type="submit" class="focus:outline-none text-white bg-amber-400 hover:bg-amber-500 focus:ring-4 focus:ring-amber-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-8">Iniciar Sesión</button>
+
+        <a class="text-amber-400 hover:text-amber-500 text-center cursor-pointer" (click)="sendOption()">Registrarse</a>
+
+    </form>
+</section>

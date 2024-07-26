@@ -1,0 +1,49 @@
+<p-dialog 
+    *ngIf="comic"
+    [header]="comic.title" 
+    [(visible)]="show" 
+    [style]="{width: '90vw', height: '90vh'}"
+    [draggable]="false"
+    [modal]="true"
+    (onHide)="closeView()"
+>
+
+<div class="grid md:grid-cols-3 grid-cols-1 aninmate__animated animate__fadeIn">
+    <img
+        class="rounded-t-lg h-[calc(100vh-260px)] w-full object-contain"
+        [src]="comic.thumbnail.path + '.' + comic.thumbnail.extension"
+        [alt]="comic.title" />
+    <div class="col-span-2 px-5">
+        <div class="flex flex-col gap-2 my-8 justify-center">
+            <label class="font-bold">Descripción</label>
+            <p>{{comic.description || 'No hay descripción'}}</p>
+        </div>
+        <div class="flex flex-col gap-2 my-8 justify-center">
+            <label class="font-bold">Creadores</label>
+            <ul>
+                <li *ngFor="let creator of comic.creators.items">- {{creator.name}}</li>
+            </ul>
+        </div>
+        <div class="flex flex-col gap-2 my-8 justify-center">
+            <label class="font-bold">Precio</label>
+            <p>{{comic.prices[0].price}}</p>
+        </div>
+
+        <div class="flex flex-col gap-2 my-8 justify-center">
+            <label class="font-bold">Variantes</label>
+            <ul>
+                <li *ngFor="let variant of comic.variants">- {{variant.name}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<ng-template pTemplate="footer">
+    <button type="button" 
+    *ngIf="!isFavorite"
+        (click)="addFavorite()" 
+        class="focus:outline-none flex items-center gap-2 ms-auto content-end text-white bg-amber-400 hover:bg-amber-500 focus:ring-4 focus:ring-amber-300 font-medium rounded-lg text-sm px-5 py-2.5">
+        <i class="pi pi-heart-fill text-white"></i>
+        Favorito
+    </button>
+</ng-template>
+</p-dialog>

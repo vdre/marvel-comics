@@ -1,0 +1,8 @@
+<section class="h-screen w-screen grid md:grid-cols-5 grid-cols-1 animate__animated animate__fadeIn">
+    <!-- <div></div> -->
+     <img class="col-span-3 h-screen object-cover animate__animated animate__fadeIn" src="assets/images/img_home.jpg" alt="">
+    <div class="grid place-content-center col-span-2">
+        <app-login *ngIf="optionAction === 'login'" (optionAction)="getOption($event)"></app-login>
+        <app-register *ngIf="optionAction === 'register'" (optionAction)="getOption($event)"></app-register>
+    </div>
+</section>
